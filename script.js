@@ -10,23 +10,41 @@ const videos=[
 ];
 
 const grid=document.querySelector("#videoGrid");
+const count=document.querySelector("#resultCount");
+let currentCategory="All";
+
 function render(list){
- grid.innerHTML=list.length?list.map(v=>`<article class="card"><div class="thumb">${v.icon}</div><div class="card-body"><h3>${v.title}</h3><div class="meta">${v.meta}</div></div></article>`).join(""):`<div class="empty">কোনো ভিডিও পাওয়া যায়নি।</div>`;
+  count.textContent=`${list.length} video${list.length===1?'':'s'}`;
+  grid.innerHTML=list.length?list.map(v=>`<article class="card" tabindex="0" onclick="showToast('Opening: ${escapeHtml(v.title)}')"><div class="thumb">${v.icon}</div><div class="card-body"><h3>${v.title}</h3><div class="meta">${v.meta}</div></div></article>`).join(""):`<div class="empty">কোনো ভিডিও পাওয়া যায়নি। অন্য কিছু search করে দেখুন।</div>`;
 }
+function escapeHtml(text){return text.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function filtered(){
+  const q=document.querySelector("#search").value.toLowerCase().trim();
+  return videos.filter(v=>(currentCategory==="All"||v.cat===currentCategory) && (v.title+" "+v.meta+" "+v.cat).toLowerCase().includes(q));
+}
+function update(){render(filtered());}
 render(videos);
 
 document.querySelectorAll(".categories button").forEach(btn=>{
- btn.onclick=()=>{
-   document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
-   btn.classList.add("active");
-   const cat=btn.dataset.cat;
-   render(cat==="All"?videos:videos.filter(v=>v.cat===cat));
- };
+  btn.onclick=()=>{
+    document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    currentCategory=btn.dataset.cat;
+    update();
+  };
 });
 
-document.querySelector("#search").addEventListener("input",e=>{
- const q=e.target.value.toLowerCase().trim();
- render(videos.filter(v=>(v.title+" "+v.meta+" "+v.cat).toLowerCase().includes(q)));
-});
+document.querySelector("#search").addEventListener("input",update);
+document.querySelector("#watchNow").onclick=()=>document.querySelector("#trending").scrollIntoView({behavior:"smooth"});
+document.querySelector("#goLive").onclick=()=>document.querySelector("#live").scrollIntoView({behavior:"smooth"});
+document.querySelector("#menuBtn").onclick=()=>showToast("Home • Trending • Live • Categories • About");
 
-document.querySelector("#menuBtn").onclick=()=>alert("Menu: Home • Trending • Live • Categories • About • Contact");
+let toastTimer;
+function showToast(message){
+  const toast=document.querySelector("#toast");
+  toast.textContent=message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
+}
+window.showToast=showToast;

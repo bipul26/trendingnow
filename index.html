@@ -3,29 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NeonFlix — Watch • Explore • Enjoy</title>
+  <meta name="theme-color" content="#07070c">
+  <meta name="description" content="Trending Now — watch, explore and discover trending videos.">
+  <title>Trending Now — Watch • Explore • Discover</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="#"><span class="logo">▶</span> Neon<span>Flix</span></a>
-  <div class="search"><span>⌕</span><input id="search" placeholder="Search videos, creators, topics..."></div>
-  <button class="icon" id="menuBtn">☰</button>
+  <a class="brand" href="#top" aria-label="Trending Now home">
+    <span class="logo"><span>▶</span></span><span>Trending <b>Now</b></span>
+  </a>
+  <div class="search"><span>⌕</span><input id="search" type="search" placeholder="Search videos, creators, topics..." autocomplete="off"></div>
+  <button class="icon" id="menuBtn" aria-label="Open menu">☰</button>
 </header>
 
-<main>
+<main id="top">
   <section class="hero">
-    <div>
-      <p class="eyebrow">WATCH • EXPLORE • ENJOY</p>
-      <h1>Welcome to <b>NeonFlix</b></h1>
-      <p>Discover music, gaming, technology, travel, education and more.</p>
-      <button class="primary" onclick="document.querySelector('#trending').scrollIntoView({behavior:'smooth'})">▶ Watch Now</button>
+    <div class="hero-glow glow-one"></div><div class="hero-glow glow-two"></div>
+    <div class="hero-content">
+      <p class="eyebrow">TREND • WATCH • DISCOVER</p>
+      <h1>Welcome to<br><strong>Trending Now</strong></h1>
+      <p>Discover music, gaming, technology, travel, education and the videos everyone is talking about.</p>
+      <div class="hero-actions">
+        <button class="primary" id="watchNow">▶ Explore Videos</button>
+        <button class="secondary" id="goLive">🔴 Live Now</button>
+      </div>
+      <div class="stats"><span><b>8+</b> categories</span><i></i><span><b>24/7</b> discovery</span><i></i><span><b>New</b> every day</span></div>
     </div>
   </section>
 
-  <div class="notice">📢 নতুন আপডেট: এখন থেকে আরও ভালো কোয়ালিটির ভিডিও উপভোগ করুন!</div>
+  <div class="notice"><span>📢</span><b>নতুন আপডেট</b> — Trending Now-এ প্রতিদিন নতুন ও জনপ্রিয় ভিডিও খুঁজে নিন!</div>
 
-  <nav class="categories" id="categories">
+  <nav class="categories" id="categories" aria-label="Video categories">
     <button class="active" data-cat="All">▦ All</button>
     <button data-cat="Music">♫ Music</button>
     <button data-cat="Gaming">🎮 Gaming</button>
@@ -35,31 +44,37 @@
     <button data-cat="Education">🎓 Education</button>
   </nav>
 
-  <section class="live panel">
-    <div class="section-title"><h2>🔴 LIVE</h2><span>Now Streaming</span></div>
+  <section class="live panel" id="live">
+    <div class="section-title"><div><span class="mini-label">LIVE</span><h2>Watch Live</h2></div><span class="now">● Now Streaming</span></div>
     <div class="live-content">
-      <div class="live-thumb"><span>LIVE</span><div>▶</div></div>
-      <div>
+      <div class="live-thumb"><span class="live-badge">LIVE</span><div class="pulse">▶</div><small>Trending Now Live</small></div>
+      <div class="live-info">
         <h2>Live Chill Vibes</h2>
         <p>Music • Chill • Relax</p>
-        <p class="muted">6.3K watching</p>
-        <button class="primary">▶ Watch Live</button>
+        <p class="muted">6.3K watching right now</p>
+        <button class="primary" onclick="showToast('Live player coming soon!')">▶ Watch Live</button>
       </div>
     </div>
   </section>
 
-  <section id="trending">
-    <div class="section-title"><h2>🔥 Trending Videos</h2><span>See All →</span></div>
+  <section id="trending" class="video-section">
+    <div class="section-title"><div><span class="mini-label">DISCOVER</span><h2>🔥 Trending Videos</h2></div><span id="resultCount">8 videos</span></div>
     <div class="grid" id="videoGrid"></div>
+  </section>
+
+  <section class="about panel">
+    <div><span class="mini-label">ABOUT</span><h2>Your daily dose of what's trending.</h2><p>Trending Now is a clean, fast and mobile-friendly video discovery homepage. Search, filter and explore content by category.</p></div>
+    <button class="secondary" onclick="showToast('Thanks for visiting Trending Now!')">♡ Follow Trending Now</button>
   </section>
 </main>
 
 <footer>
-  <div class="brand">▶ Neon<span>Flix</span></div>
-  <p>Watch • Explore • Enjoy</p>
-  <small>© 2026 NeonFlix. All rights reserved.</small>
+  <div class="brand"><span class="logo"><span>▶</span></span><span>Trending <b>Now</b></span></div>
+  <p>Watch • Explore • Discover</p>
+  <small>© 2026 Trending Now. All rights reserved.</small>
 </footer>
 
+<div class="toast" id="toast" role="status"></div>
 <script src="script.js"></script>
 </body>
 </html>
