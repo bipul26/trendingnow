@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeonFlix — Watch • Explore • Enjoy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="logo">▶</span> Neon<span>Flix</span></a>
+  <div class="search"><span>⌕</span><input id="search" placeholder="Search videos, creators, topics..."></div>
+  <button class="icon" id="menuBtn">☰</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">WATCH • EXPLORE • ENJOY</p>
+      <h1>Welcome to <b>NeonFlix</b></h1>
+      <p>Discover music, gaming, technology, travel, education and more.</p>
+      <button class="primary" onclick="document.querySelector('#trending').scrollIntoView({behavior:'smooth'})">▶ Watch Now</button>
+    </div>
+  </section>
+
+  <div class="notice">📢 নতুন আপডেট: এখন থেকে আরও ভালো কোয়ালিটির ভিডিও উপভোগ করুন!</div>
+
+  <nav class="categories" id="categories">
+    <button class="active" data-cat="All">▦ All</button>
+    <button data-cat="Music">♫ Music</button>
+    <button data-cat="Gaming">🎮 Gaming</button>
+    <button data-cat="Comedy">😄 Comedy</button>
+    <button data-cat="Tech">💻 Tech</button>
+    <button data-cat="Vlog">📹 Vlog</button>
+    <button data-cat="Education">🎓 Education</button>
+  </nav>
+
+  <section class="live panel">
+    <div class="section-title"><h2>🔴 LIVE</h2><span>Now Streaming</span></div>
+    <div class="live-content">
+      <div class="live-thumb"><span>LIVE</span><div>▶</div></div>
+      <div>
+        <h2>Live Chill Vibes</h2>
+        <p>Music • Chill • Relax</p>
+        <p class="muted">6.3K watching</p>
+        <button class="primary">▶ Watch Live</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="trending">
+    <div class="section-title"><h2>🔥 Trending Videos</h2><span>See All →</span></div>
+    <div class="grid" id="videoGrid"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="brand">▶ Neon<span>Flix</span></div>
+  <p>Watch • Explore • Enjoy</p>
+  <small>© 2026 NeonFlix. All rights reserved.</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
